@@ -1,5 +1,5 @@
-variable "AWS_REGION" {
-  default = "eu-west-1"
+ variable "AWS_REGION" {
+  default = "us-east-1"
 }
 variable "PATH_TO_PRIVATE_KEY" {
   default = "mykey"
@@ -22,7 +22,7 @@ variable "JENKINS_VERSION" {
   default = "2.121.2"
 }
 variable "TERRAFORM_VERSION" {
-  default = "0.11.7"
+  default = "0.11.11"
 }
 
 variable "APP_INSTANCE_COUNT" {
