@@ -14,3 +14,6 @@ touch mykey
 touch mykey.pub
 terraform apply -auto-approve -var APP_INSTANCE_COUNT=1 -target aws_instance.app-instance
 ```
+
+
+created ami id `ami-00cf9e60bf9dedc83`
