@@ -45,7 +45,7 @@ rm -f get-pip.py
 pip install awscli
 
 # install terraform
-TERRAFORM_VERSION="0.11.7"
+TERRAFORM_VERSION="0.11.11"
 wget -q https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_linux_amd64.zip \
 && unzip -o terraform_${TERRAFORM_VERSION}_linux_amd64.zip -d /usr/local/bin \
 && rm terraform_${TERRAFORM_VERSION}_linux_amd64.zip
