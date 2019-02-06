@@ -13,7 +13,7 @@ pipeline{
          sh "terraform init"
          sh "touch mykey"
          sh "touch mykey.pub"
-         sh  "terraform apply -auto-approve -target aws_ecs_service.myapp-service -var MYAPP_SERVICE_ENABLE="${params.APP_ENABLED}" -var MYAPP_VERSION=${params.APP_VERSION_NUMBER}" 
+         sh "terraform apply -auto-approve -target aws_ecs_service.myapp-service -var MYAPP_SERVICE_ENABLE=${params.APP_ENABLED} -var MYAPP_VERSION=${params.APP_VERSION_NUMBER}" 
       }
     }
 
