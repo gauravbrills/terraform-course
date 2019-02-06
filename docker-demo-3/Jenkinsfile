@@ -1,0 +1,40 @@
+pipeline{
+ agent any
+ options { buildDiscarder(logRotator(daysToKeepStr: '4', numToKeepStr: '2')) }
+ parameters {
+        string(name: 'APP_VERSION_NUMBER', defaultValue: ' ', description: 'App Version Number ?') 
+        string(name: 'INSTANCES', defaultValue: '1', description: 'App Version Number ?') 
+    }
+ stages{    
+  stage('deploy container') {
+      steps {
+         echo 'deploying container'
+         sh "cd docker-demo-3"
+         sh "terraform init"
+         sh "touch mykey"
+         sh "touch mykey.pub"
+         sh  "terraform apply -auto-approve -target aws_ecs_service.myapp-service -var MYAPP_SERVICE_ENABLE=${params.INSTANCES} -var MYAPP_VERSION=${params.APP_VERSION_NUMBER}" 
+      }
+    }
+
+  }
+  post {
+        always {
+            echo 'One way or another, I have finished'
+            deleteDir() /* clean up our workspace */
+        }
+        success {
+            echo 'I succeeeded!'
+        }
+        unstable {
+            echo 'I am unstable :/'
+        }
+        failure {
+            echo 'I failed :('
+        }
+        changed {
+            echo 'Things were different before...'
+        }
+    }
+ }
+  
