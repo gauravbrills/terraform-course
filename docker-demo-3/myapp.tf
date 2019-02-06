@@ -17,7 +17,8 @@ resource "aws_ecs_service" "myapp-service" {
   count = "${var.MYAPP_SERVICE_ENABLE}"
   name = "myapp"
   cluster = "${aws_ecs_cluster.example-cluster.id}"
-  task_definition = "${aws_ecs_task_definition.myapp-task-definition.arn}"
+   # Track the latest ACTIVE revision
+  task_definition = "${aws_ecs_task_definition.myapp-task-definition.family}:${max("${aws_ecs_task_definition.myapp-task-definition.revision}", "${data.aws_ecs_task_definition.myapp-task-definition.revision}")}"
   desired_count = 1
   iam_role = "${aws_iam_role.ecs-service-role.arn}"
   depends_on = ["aws_iam_policy_attachment.ecs-service-attach1"]
