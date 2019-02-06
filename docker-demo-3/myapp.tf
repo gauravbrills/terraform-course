@@ -8,6 +8,12 @@ data "template_file" "myapp-task-definition-template" {
   }
 }
 
+# Simply specify the family to find the latest ACTIVE revision in that family.
+data "aws_ecs_task_definition" "myapp-task-definition" {
+  task_definition = "${aws_ecs_task_definition.myapp-task-definition.family}"
+}
+
+
 resource "aws_ecs_task_definition" "myapp-task-definition" {
   family                = "myapp"
   container_definitions = "${data.template_file.myapp-task-definition-template.rendered}"
