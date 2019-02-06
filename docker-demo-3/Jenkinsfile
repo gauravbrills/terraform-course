@@ -11,7 +11,7 @@ pipeline{
          echo 'Deploying container'
          sh '''
              cd docker-demo-3
-             terraform init
+             terraform init -input=false
              touch mykey
              touch mykey.pub
              '''
